@@ -48,26 +48,6 @@ base16-materia
 ################################################################################
 # Functions
 ################################################################################
-function add-vim-plug
-    set GIT_USERNAME $argv[1]
-    set GIT_REPOSITORY $argv[2]
-
-    set SSH_REPO "git@github.com:$GIT_USERNAME/$GIT_REPOSITORY.git"
-    set TARGET_PATH "vim/plugins/$GIT_REPOSITORY"
-
-    set PREV_PWD (pwd)
-
-    cd $HOME/.config/fish/
-
-    # Move to actual path
-    cd (pwd -P)
-    cd ../../
-
-    git submodule add $SSH_REPO $TARGET_PATH
-
-    cd $PREV_PWD
-end
-
 ## Fetches a file a symlink points to and copies it to the location of the
 ## symlink.
 function sn-fetch
