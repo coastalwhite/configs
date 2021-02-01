@@ -4,6 +4,9 @@ starship init fish | source
 source $HOME/.config/shell/aliases
 alias resource="source $HOME/.config/fish/config.fish"
 
+# Remove the fish greeting
+set --erase fish-greeting
+
 ################################################################################
 # Path exports
 ################################################################################
@@ -13,9 +16,6 @@ set -x PATH $HOME/bin /usr/local/bin $PATH
 set -x PATH $HOME/.deno/bin $PATH
 # Cargo
 set -x PATH $HOME/.cargo/bin $PATH
-
-# Starship config (XDG)
-set -x STARSHIP_CONFIG $HOME/.config/starship/config.toml
 ################################################################################
 
 
@@ -29,8 +29,12 @@ set -x STARSHIP_CONFIG $HOME/.config/starship/config.toml
 # Other environment variables
 ################################################################################
 set -x SHELL fish
+
 # Set editor to neovim
 set -x EDITOR nvim
+
+# Starship config (XDG)
+set -x STARSHIP_CONFIG $HOME/.config/starship/config.toml
 ################################################################################
 
 
