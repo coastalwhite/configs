@@ -5,7 +5,7 @@ source $HOME/.config/shell/aliases
 alias resource="source $HOME/.config/fish/config.fish"
 
 # Remove the fish greeting
-set --erase fish-greeting
+set --erase fish_greeting
 
 ################################################################################
 # Path exports
