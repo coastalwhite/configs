@@ -1,0 +1,30 @@
+[user]
+	username = coastalwhite
+	name = Gijs Burghoorn
+	email = g.burghoorn@gmail.com
+
+[alias]
+	# Some nice graphical displays for the git history
+	h = log --format=oneline --abbrev-commit --graph --branches --remotes --tags --max-count=20
+	hist = log --format=oneline --abbrev-commit --graph
+	hinstall = log --format=oneline --abbrev-commit --graph --all
+
+	# A handy dandy uncommit command
+	uncommit = reset HEAD^
+
+[core]
+	# Editor should be Neovim
+	editor = /usr/local/bin/nvim
+
+	# Global gitignore file
+	excludesfile = ~/.config/git/global-ignore
+
+[init]
+	# Set the default branch to be main. This is nice, because I mostly use Github anyway
+	defaultBranch = main
+
+[commit]
+	# This is a template which will be used with every config.
+	template = ~/.config/git/commit-template
+
+
