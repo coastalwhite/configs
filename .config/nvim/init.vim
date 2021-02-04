@@ -13,11 +13,10 @@
 " https://github.com/amix/vimrc/blob/master/vimrcs/extended.vim
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-set rtp+=$HOME/.config/vim
-
 " Move the ugly netrwhist files to the cache folder
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
+set shell=/bin/bash
 let mapleader=";" " Map leader to space
 set nocompatible " Don't try to behave like Vi
 
@@ -282,11 +281,16 @@ Plug 'andymass/vim-matchup'
 Plug 'airblade/vim-rooter'
 
 " Creates a fuzzy finder with a keybinding
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+if $XDG_DATA_HOME != ''
+    let fzf_location=$XDG_DATA_HOME.'/fzf'
+else
+    let fzf_location=$HOME.'/.local/share/fzf'
+end
+Plug 'junegunn/fzf', { 'dir': fzf_location, 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " LSP implementation
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
 
 " Color Scheme Plugin
 " This is where I get the base16 theme I use from:
@@ -314,6 +318,8 @@ call plug#end()
 " avoid mistyping commands
 command! W w
 command! Wq wq
+command! Q q
+command! Qa qa
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Opening files

@@ -1,1 +1,23 @@
-/Users/gijsburghoorn/dotfiles/shell/lib/common-sh
+source $HOME/.config/shell/aliases
+source $HOME/.config/shell/base16-materia.sh
+
+################################################################################
+# Path exports
+################################################################################
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Deno
+export PATH="$HOME/.deno/bin:$PATH"
+# Cargo
+export PATH="$HOME/.cargo/bin/:$PATH"
+
+# Change the starship init path to XDG standard
+export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
+################################################################################
+
+################################################################################
+# Other environment variables
+################################################################################
+# Set editor to neovim
+export EDITOR=nvim
+################################################################################

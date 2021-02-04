@@ -1,1 +1,26 @@
-/Users/gijsburghoorn/dotfiles/shell/lib/aliases
+################################################################################
+# Aliasses
+################################################################################
+## Change rm to trash instead of rm
+## Currently using jakechampion/trash
+alias rm="trash"
+
+## Change cat to bat
+alias cat="bat"
+
+## Have some nice listing
+alias l="exa --group-directories-first --oneline"
+
+## Alias tokei (coding stats)
+alias codestats="tokei"
+
+## NeoVim
+alias vim="nvim"
+alias vi="nvim"
+
+## Configs bare repo
+alias cfg-git='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+## Include tmux config file
+# alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
+################################################################################
