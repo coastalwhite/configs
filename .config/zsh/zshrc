@@ -1,0 +1,24 @@
+# Source the more general shellrc
+source $HOME/.config/shell/common-sh
+source $HOME/.config/zsh/plugins/*.zsh
+
+source /Users/gijsburghoorn/.config/broot/launcher/bash/br
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias resource="source $HOME/.config/zsh/zshrc"
+
+eval "$(starship init zsh)"
+
+EDITOR=nvim
+
+################################################################################
+# ZSH Autosuggests settings
+################################################################################
+# Enable asynchronious fetching
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# Bind capture to control
+bindkey '^o' autosuggest-accept
+
+# Base16-Materia
