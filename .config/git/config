@@ -14,7 +14,7 @@
 
 [core]
 	# Editor should be Neovim
-	editor = /usr/local/bin/nvim
+	editor = nvim
 
 	# Global gitignore file
 	excludesfile = ~/.config/git/global-ignore
@@ -28,3 +28,6 @@
 	template = ~/.config/git/commit-template
 
 
+[pull]
+    # Rebase upon a pull
+	rebase = true

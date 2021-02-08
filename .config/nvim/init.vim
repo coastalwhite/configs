@@ -17,23 +17,29 @@
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
 set shell=/bin/bash
-let mapleader=";" " Map leader to space
+let mapleader="\<Space>" " Map leader to space
 set nocompatible " Don't try to behave like Vi
 
 set clipboard+=unnamedplus " Use OS clipboard by default
 
 set title " Show file being edited in title
 
+hi Normal ctermbg=NONE
+
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""""""""""""
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-materia
+
+" Brighter comments
+call g:Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 set background=dark
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Command line options
 """""""""""""""""""""""""""""""""""""""""""""""""
 set wildmenu " Enhance command-line completion
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 set ttyfast " Optimize for fast terminal connections
 """""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -43,7 +49,7 @@ set exrc " Allow for local vimrc's
 set secure " Only allow secure vimrc commands
 
 " Reload the vimrc every time you save it.
-autocmd! bufwritepost ~/dotfiles/vimrc source ~/dotfiles/vimrc
+autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Motions
@@ -69,18 +75,6 @@ au FocusGained,BufEnter * checktime " Check if the buffer is adjusted from the o
 
 set hidden " When a buffer is abandoned, it remains loaded in the background.
 
-try
-	" Automatically open new buffers in the following sequence
-	" 1. Try to focus a open buffer
-	" 2. Try to focus a open tab
-	" 3. Try to create a new tab
-	set switchbuf=useopen,usetab,newtab
-
-	" Permanently show the tab bar
-	set stal=2
-catch
-endtry
-
 " On <leader>to close all other tabs
 map <leader>to :tabonly<cr> 
 " On <leader>tc close current tab
@@ -91,7 +85,7 @@ map <leader>tn :tabnew<cr>
 map <leader>tm :tabmove
 
 " Toggling between buffers
-nnoremap <Tab><Tab> :b#<cr>
+nnoremap <leader><Tab> :b#<cr>
 
 " Saving with Leader s
 nnoremap <leader>w :w<CR>
@@ -149,7 +143,7 @@ set hlsearch " Highlight searches
 set incsearch " Hightlight dynamically as we search
 
 " turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>h :nohlsearch<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Encoding and filter options
@@ -163,9 +157,8 @@ set noeol " ^
 """""""""""""""""""""""""""""""""""""""""""""""""
 set nobackup " Remove backup files (we have git for that)
 set noswapfile " Remove swap files
-if exists("&undodir") " Check that this option exists
-	set undodir=~/.vim/undo " Set undodir so remain after buffer closing
-endif
+set undodir="~/.vimdid"
+set undofile
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Modelines
@@ -225,10 +218,7 @@ nnoremap <up> gk
 
 " Folding
 """""""""""""""""""""""""""""""""""""""""""""""""
-augroup vimrc
-	au BufReadPre * setlocal foldmethod=indent
-	au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-augroup END
+set nofoldenable
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins
@@ -275,8 +265,9 @@ Plug 'machakann/vim-highlightedyank'
 " % commands
 Plug 'andymass/vim-matchup'
 
-" Fuzzy Finder
-"
+" Aligning
+Plug 'godlygeek/tabular'
+
 " Moves vim root to closest git initiated dir
 Plug 'airblade/vim-rooter'
 
@@ -342,3 +333,7 @@ au BufReadPost bashrc set syntax=zsh
 " Make syntax hightlighting turn on for zshrc files
 au BufReadPost zshrc set syntax=zsh
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+" Map Control-L to escape
+map <C-L> <Esc>
+imap <C-L> <Esc>

@@ -3,7 +3,7 @@
 ################################################################################
 ## Change rm to trash instead of rm
 ## Currently using jakechampion/trash
-alias rm="trash"
+alias d="trash"
 
 ## Change cat to bat
 alias cat="bat"

@@ -20,4 +20,7 @@ export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 ################################################################################
 # Set editor to neovim
 export EDITOR=nvim
+
+# Set default FZF command
+export FZF_DEFAULT_COMMAND='rg --files --follow --no-ignore-vcs --hidden -g "!{node_modules/*,.git/*}"'
 ################################################################################
