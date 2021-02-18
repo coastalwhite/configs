@@ -302,6 +302,14 @@ Plug 'tpope/vim-repeat'
 " Make it easy to interact with unicode characters
 Plug 'chrisbra/unicode.vim'
 
+" Echo documentation when you use it
+Plug 'Shougo/echodoc.vim'
+let g:echodoc#enable_at_startup=1
+
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Avoid mistyping

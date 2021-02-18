@@ -21,6 +21,9 @@ alias vi="nvim"
 ## Configs bare repo
 alias cfg-git='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+## SSH term
+alias ssh='TERM=xterm-color ssh'
+
 ## Include tmux config file
 # alias tmux='tmux -f $HOME/.config/tmux/tmux.conf'
 ################################################################################
