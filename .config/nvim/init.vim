@@ -228,7 +228,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " VIM ENHANCEMENTS
 "
 " Comment out lines
-Plug 'tpope/vim-commentary'
+Plug 'tyru/caw.vim'
 
 " Repeat with the dot command for other plugins
 Plug 'tpope/vim-repeat'
