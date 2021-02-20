@@ -305,6 +305,7 @@ Plug 'chrisbra/unicode.vim'
 " Echo documentation when you use it
 Plug 'Shougo/echodoc.vim'
 let g:echodoc#enable_at_startup=1
+set cmdheight=2
 
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
