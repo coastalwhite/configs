@@ -349,3 +349,7 @@ au BufReadPost zshrc set syntax=zsh
 " Map Control-L to escape
 map <C-L> <Esc>
 imap <C-L> <Esc>
+
+" Have background opacity
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
