@@ -230,6 +230,9 @@ call plug#begin(stdpath('data') . '/plugged')
 " Comment out lines
 Plug 'tyru/caw.vim'
 
+" Markdown support
+Plug 'drmingdrmer/vim-syntax-markdown'
+
 " Repeat with the dot command for other plugins
 Plug 'tpope/vim-repeat'
 

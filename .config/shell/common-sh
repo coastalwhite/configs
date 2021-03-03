@@ -4,7 +4,7 @@ source $HOME/.config/shell/base16-materia.sh
 ################################################################################
 # Path exports
 ################################################################################
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH:$HOME/.local/bin
 
 # Deno
 export PATH="$HOME/.deno/bin:$PATH"
