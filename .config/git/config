@@ -31,3 +31,10 @@
 [pull]
     # Rebase upon a pull
 	rebase = true
+
+[merge]
+	tool = nvim -d
+
+[diff]
+	algorithm = patience
+	compactionHeuristic = true

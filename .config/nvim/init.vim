@@ -62,6 +62,11 @@ nnoremap no o<Esc>
 nnoremap nO O<Esc>
 """""""""""""""""""""""""""""""""""""""""""""""""
 
+" Reformatting lines
+"""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>rp vipJgqq
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Hightlighting
 """""""""""""""""""""""""""""""""""""""""""""""""
 " highlight last inserted text
@@ -313,6 +318,9 @@ set cmdheight=2
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'jxnblk/vim-mdx-js'
+
+Plug 'alexlafroscia/postcss-syntax.vim'
 
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""

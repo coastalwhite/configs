@@ -11,6 +11,7 @@ alias resource="source $HOME/.config/zsh/zshrc"
 eval "$(starship init zsh)"
 
 EDITOR=nvim
+set -o vi
 
 ################################################################################
 # ZSH Autosuggests settings
@@ -19,6 +20,5 @@ EDITOR=nvim
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # Bind capture to control
+bindkey -M viins '^L' vi-cmd-mode
 bindkey '^o' autosuggest-accept
-
-# Base16-Materia
