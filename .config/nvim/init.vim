@@ -16,6 +16,14 @@
 " Move the ugly netrwhist files to the cache folder
 let g:netrw_home=$XDG_CACHE_HOME.'/vim'
 
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
 set shell=/bin/bash
 let mapleader="\<Space>" " Map leader to space
 set nocompatible " Don't try to behave like Vi
@@ -54,17 +62,19 @@ autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 
 " Motions
 """""""""""""""""""""""""""""""""""""""""""""""""
-" Jump to start and end of line using the home row keys
-nnoremap <Space> ^
-
 " Add a new line without going into insert mode
-nnoremap no o<Esc>
-nnoremap nO O<Esc>
+nnoremap <silent> mo :<C-u>call append(line("."),   repeat([""], v:count1))<CR>
+nnoremap <silent> mO :<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Reformatting lines
 """""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Leader>rp vipJgqq
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Markdown shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""
+au BufEnter *.md,*.tex setlocal spell
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Hightlighting
@@ -228,102 +238,9 @@ set nofoldenable
 
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
-let g:nvim_config_root = stdpath('config')
-call plug#begin(stdpath('data') . '/plugged')
-" VIM ENHANCEMENTS
-"
-" Comment out lines
-Plug 'tyru/caw.vim'
-
-" Markdown support
-Plug 'drmingdrmer/vim-syntax-markdown'
-
-" Repeat with the dot command for other plugins
-Plug 'tpope/vim-repeat'
-
-" Surrounding text with certain characters
-Plug 'tpope/vim-surround'
-
-" Respect Snake case and camel case with word motions
-Plug 'chaoren/vim-wordmotion'
-
-" TOML Syntax support
-Plug 'cespare/vim-toml'
-
-" Fish Syntax support
-Plug 'dag/vim-fish'
-
-" Open at the place you left off except for some cases
-Plug 'farmergreg/vim-lastplace'
-
-" GIT ENHANCEMENTS
-"
-" Git Gutter
-Plug 'airblade/vim-gitgutter'
-
-" GUI ENHANCEMENTS
-
-" Bar at bottom
-Plug 'itchyny/lightline.vim'
-" Lightline
-
-" Highlight what you are yanking
-Plug 'machakann/vim-highlightedyank'
-
-" % commands
-Plug 'andymass/vim-matchup'
-
-" Aligning
-Plug 'godlygeek/tabular'
-
-" Moves vim root to closest git initiated dir
-Plug 'airblade/vim-rooter'
-
-" Creates a fuzzy finder with a keybinding
-if $XDG_DATA_HOME != ''
-    let fzf_location=$XDG_DATA_HOME.'/fzf'
-else
-    let fzf_location=$HOME.'/.local/share/fzf'
-end
-Plug 'junegunn/fzf', { 'dir': fzf_location, 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" LSP implementation
-Plug 'neoclide/coc.nvim', { 'branch': 'release', 'do': 'yarn install --frozen-lockfile' }
-
-" Color Scheme Plugin
-" This is where I get the base16 theme I use from:
-" 'chriskempson/base16-vim'
-
-" Syntactic language support
-Plug 'rust-lang/rust.vim'
-
-" Formatting of files
-Plug 'sbdchd/neoformat'
-
-" Show css color
-Plug 'ap/vim-css-color'
-
-" Repeat all commands
-Plug 'tpope/vim-repeat'
-
-" Make it easy to interact with unicode characters
-Plug 'chrisbra/unicode.vim'
-
-" Echo documentation when you use it
-Plug 'Shougo/echodoc.vim'
-let g:echodoc#enable_at_startup=1
-set cmdheight=2
-
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'jxnblk/vim-mdx-js'
-
-Plug 'alexlafroscia/postcss-syntax.vim'
-
-call plug#end()
+source ~/.config/nvim/plug-config/index.vim
 """""""""""""""""""""""""""""""""""""""""""""""""
+
 " Avoid mistyping
 """""""""""""""""""""""""""""""""""""""""""""""""
 " avoid mistyping commands
@@ -335,8 +252,12 @@ command! Qa qa
 
 " Opening files
 """""""""""""""""""""""""""""""""""""""""""""""""
-" Open file (useful for HTML)
-noremap <silent> <leader>o :!open %<CR>
+if has("gui_running")
+    if g:os == "Darwin"
+        " Open file (useful for HTML)
+        noremap <silent> <leader>o :!open %<CR>
+    endif
+endif
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 " Add specific syntax for certain files
