@@ -2,6 +2,10 @@
 """"""""""""""""""""""""""""""""""""""""
 let g:nvim_config_root = stdpath('config')
 call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
 " VIM ENHANCEMENTS
 
 " Comment out linest
