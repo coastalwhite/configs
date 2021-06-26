@@ -41,7 +41,26 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "texlab", "clangd", "cssls", "dotls", "html", "denols" }
+local servers = { "pyright", "rust_analyzer", "clangd", "cssls", "dotls", "html", "denols" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
+
+local texlab_settings = {
+    texlab = {
+        build = {
+            executable = "tectonic";
+            args = {
+                "%f",
+                "--synctex",
+                "--keep-logs",
+                "--keep-intermediates",
+            };
+            onSave = true;
+        };
+    };
+}
+nvim_lsp["texlab"].setup {
+    on_attach = on_attach;
+    settings = texlab_settings;
+}
