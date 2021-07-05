@@ -2,7 +2,7 @@ local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local set_keybinds = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -27,6 +27,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>]', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<leader>p", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+end
+
+local on_attach = function(client, bufnr)
+    set_keybinds(client, bufnr)
 end
 
 -- Language servers:
@@ -41,7 +46,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "clangd", "cssls", "dotls", "html", "denols" }
+local servers = { "pyright", "clangd", "cssls", "dotls", "html", "denols" }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach }
 end
@@ -60,7 +65,29 @@ local texlab_settings = {
         };
     };
 }
+
 nvim_lsp["texlab"].setup {
     on_attach = on_attach;
     settings = texlab_settings;
 }
+
+nvim_lsp.rust_analyzer.setup({
+    on_attach=function(client, bufnr)
+        set_keybinds(client, bufnr)
+        require'completion'.on_attach(client)
+    end,
+    setttings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})

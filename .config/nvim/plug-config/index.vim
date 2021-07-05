@@ -67,7 +67,8 @@ Plug 'junegunn/fzf.vim'
 " LSP implementation
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
-
+" Autocompletion framework for built-in LSP
+Plug 'nvim-lua/completion-nvim'
 
 
 " Color Scheme Plugin
