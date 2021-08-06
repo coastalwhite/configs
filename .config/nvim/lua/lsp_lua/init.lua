@@ -43,51 +43,29 @@ end
 -- dotls (https://github.com/nikeee/dot-language-server)
 -- htmlls (https://github.com/vscode-langservers/vscode-html-languageserver-bin)
 -- denols (https://deno.land/)
+-- lua-language-server (https://github.com/sumneko/lua-language-server)
+
+local servers = {
+    { name = 'pyright', opts = {} },
+    { name = 'rust_analyzer', opts = require'lsp_lua.rust_analyzer' },
+    { name = 'texlab', opts = require'lsp_lua.texlab' },
+    { name = 'clangd', opts = {} },
+    { name = 'cssls', opts = {} },
+    { name = 'dotls', opts = {} },
+    { name = 'denols', opts = {} },
+    { name = 'sumneko_lua', opts = require'lsp_lua.lua_language_server' }
+}
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "clangd", "cssls", "dotls", "html", "denols" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
+  -- vim.api.nvim_exec(':echom "' .. lsp .. '"', false)
+  lsp.opts.on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      if lsp.opts['on_attach'] ~= nil then
+          lsp.opts.on_attach(client, bufnr)
+      end
+  end
+
+  nvim_lsp[lsp.name].setup(lsp.opts)
 end
-
-local texlab_settings = {
-    texlab = {
-        build = {
-            executable = "tectonic";
-            args = {
-                "%f",
-                "--synctex",
-                "--keep-logs",
-                "--keep-intermediates",
-            };
-            onSave = true;
-        };
-    };
-}
-
-nvim_lsp["texlab"].setup {
-    on_attach = on_attach;
-    settings = texlab_settings;
-}
-
-nvim_lsp.rust_analyzer.setup({
-    on_attach=function(client, bufnr)
-        set_keybinds(client, bufnr)
-        require'completion'.on_attach(client)
-    end,
-    setttings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "by_self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    }
-})
