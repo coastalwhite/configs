@@ -54,3 +54,9 @@ utils.map('n', 'j', 'gj')
 utils.map('n', '<down>', 'gj')
 utils.map('n', 'k', 'gk')
 utils.map('n', '<up>', 'gk')
+
+-- Telescope mappings
+utils.map('n', '<leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>')
+utils.map('n', '<leader>fg', '<cmd>lua require(\'telescope.builtin\').live_grep()<cr>')
+utils.map('n', '<leader>fb', '<cmd>lua require(\'telescope.builtin\').buffers()<cr>')
+utils.map('n', '<leader>fh', '<cmd>lua require(\'telescope.builtin\').help_tags()<cr>')

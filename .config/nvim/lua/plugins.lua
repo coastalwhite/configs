@@ -49,11 +49,12 @@ return require('packer').startup(function(use)
 
   -- Fuzzy Searching
   -----------------------------------------
-  use { 'junegunn/fzf', run = './install --bin' }
   use {
-    'ibhagwan/fzf-lua',
+    'nvim-telescope/telescope.nvim',
     requires = {
-      'vijaymarupudi/nvim-fzf' }
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-lua/plenary.nvim' }
+    }
   }
   -----------------------------------------
 
@@ -64,14 +65,13 @@ return require('packer').startup(function(use)
   use 'hrsh7th/nvim-compe'
 
   -- Autocompletion framework for built-in LSP
-  use {
-    'haorenW1025/completion-nvim',
-    opt = true,
-    requires = {
-        {'hrsh7th/vim-vsnip', opt = true},
-        {'hrsh7th/vim-vsnip-integ', opt = true}
-    }
-  }
+  -- use {
+  --   'haorenW1025/completion-nvim',
+  --   requires = {
+  --       {'hrsh7th/vim-vsnip', opt = true},
+  --       {'hrsh7th/vim-vsnip-integ', opt = true}
+  --   }
+  -- }
   -----------------------------------------
 
   -- Make it easy to interact with unicode characters
